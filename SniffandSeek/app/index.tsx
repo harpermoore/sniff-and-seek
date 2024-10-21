@@ -1,11 +1,10 @@
 import { Text, View } from "react-native";
-import TestData from "@/components/TestData";
+import HomePageList from "../components/HomePageList";
 
 export default function Index() {
   return (
     <View>
-      <Text>Sniff and Seek</Text>
-      <TestData />
+      <HomePageList />
     </View>
   );
 }
