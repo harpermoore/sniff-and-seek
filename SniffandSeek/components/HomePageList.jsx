@@ -1,49 +1,34 @@
-import { ScrollView, View, Text, StyleSheet } from "react-native";
-import { useEffect, useState } from "react";
-import { getCatData } from "../api/homepageApi";
+import { ScrollView, View, StyleSheet, Pressable, Text } from "react-native";
 import Card from "@/components/Card";
 
-export default function HomePageList() {
-  const [catData, setCatData] = useState(null);
-  const [dogData, setDogData] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await getCatData();
-      setCatData(response);
-      //   console.log(catData.data[Object.keys(catData.data)[0]]);
-    };
-    fetchData();
-  }, []);
-
-  if (!catData) {
-    // Wait until data is fetched
-    return <Text>Loading...</Text>;
-  }
-
-  const catKeys = Object.keys(catData.data);
-
-  const catList = Object.values(catData.data);
-  console.log(catList);
-
+export default function HomePageList({ list, species }) {
   return (
-    <ScrollView style={styles.listStyle}>
+    <ScrollView
+      style={styles.listStyle}
+      horizontal={true}
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={{ justifyContent: "center", alignItems: "center" }}
+    >
       <View style={styles.cardContainer}>
-        {catList.map((cat) => (
+        {list.map((animal) => (
           <Card
-            key={cat.animalID}
-            animalID={cat.animalID}
-            animalName={cat.animalName}
+            key={animal.animalID}
+            animalID={animal.animalID}
+            animalName={animal.animalName}
+            imgUri={animal.animalPictures[0].small.url}
           />
         ))}
       </View>
+      <Pressable>
+        <Text>Go to adoptable {species} list</Text>
+      </Pressable>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   listStyle: {
-    Horizontal: true,
+    elevation: 4,
   },
   cardContainer: {
     flexDirection: "row",
