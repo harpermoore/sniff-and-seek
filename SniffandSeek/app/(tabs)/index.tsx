@@ -1,7 +1,7 @@
 import { Text, View, StyleSheet } from "react-native";
 import { useState, useEffect } from "react";
 import { getCatData, getDogData } from "@/api/homepageApi";
-import HomePageList from "../components/HomePageList";
+import HomePageList from "../../components/HomePageList";
 
 export default function Index() {
   const [catData, setCatData] = useState(null);
