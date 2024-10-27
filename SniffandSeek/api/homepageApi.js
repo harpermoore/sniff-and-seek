@@ -2,7 +2,7 @@ import axios from "axios";
 
 const apikey = process.env.EXPO_PUBLIC_API_KEY;
 
-export const getCatData = async (location) => {
+export const getCatData = async (submittedValue) => {
   const requestCatData = {
     apikey: apikey,
     objectType: "animals",
@@ -17,15 +17,14 @@ export const getCatData = async (location) => {
           criteria: "cat",
         },
         {
-          fieldName: "orgLocationDistance",
-          operation: "radius",
-          criteria: "90",
-        },
-
-        {
           fieldName: "animalLocation",
           operation: "equals",
-          criteria: location,
+          criteria: submittedValue,
+        },
+        {
+          fieldName: "animalLocationDistance",
+          operation: "radius",
+          criteria: "90",
         },
       ],
       fields: [
@@ -34,6 +33,7 @@ export const getCatData = async (location) => {
         "animalBreed",
         "animalPictures",
         "animalLocation",
+        "animalPrimaryBreed",
       ],
     },
   };
@@ -46,7 +46,7 @@ export const getCatData = async (location) => {
   return response.data;
 };
 
-export const getDogData = async (location) => {
+export const getDogData = async (submittedValue) => {
   const requestCatData = {
     apikey: apikey,
     objectType: "animals",
@@ -63,7 +63,12 @@ export const getDogData = async (location) => {
         {
           fieldName: "animalLocation",
           operation: "equals",
-          criteria: location,
+          criteria: submittedValue,
+        },
+        {
+          fieldName: "animalLocationDistance",
+          operation: "radius",
+          criteria: "90",
         },
       ],
       fields: [
@@ -72,6 +77,7 @@ export const getDogData = async (location) => {
         "animalBreed",
         "animalPictures",
         "animalLocation",
+        "animalPrimaryBreed",
       ],
     },
   };

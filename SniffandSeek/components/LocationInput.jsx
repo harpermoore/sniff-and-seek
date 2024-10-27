@@ -1,15 +1,24 @@
 import { TextInput, View, StyleSheet, Pressable, Text } from "react-native";
 
-export default function LocationInput({ location, setLocation }) {
+export default function LocationInput({
+  location,
+  setLocation,
+  submittedValue,
+  setSubmittedValue,
+}) {
   return (
     <View style={styles.container}>
       <TextInput
+        autoComplete="postal-code"
         style={styles.inputStyle}
         placeholder="Enter your location"
         value={location}
         onChangeText={(input) => setLocation(input)}
       />
-      <Pressable style={styles.buttonStyle}>
+      <Pressable
+        style={styles.buttonStyle}
+        onPress={() => setSubmittedValue(location)}
+      >
         <Text style={styles.textStyle}>Search</Text>
       </Pressable>
     </View>
