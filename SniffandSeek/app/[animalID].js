@@ -1,14 +1,16 @@
 import { View, Text, Image, StyleSheet } from "react-native";
 import { getAnimalData } from "../api/animalProfileApi";
 import { useEffect, useState } from "react";
+import { useLocalSearchParams } from "expo-router";
 import Slider from "../components/Slider";
 
 export default function AnimalProfile() {
+  const animal = useLocalSearchParams();
   const [animalData, setAnimalData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const animalResponse = await getAnimalData();
+      const animalResponse = await getAnimalData(animal.animalID);
       setAnimalData(animalResponse);
     };
     fetchData();
@@ -23,6 +25,7 @@ export default function AnimalProfile() {
   console.log(dataList.animalPictures[0].large.url);
   const pictures = Object.values(dataList.animalPictures);
   console.log(pictures);
+  console.log(animal.animalID);
 
   return (
     <View>
