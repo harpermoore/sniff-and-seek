@@ -14,7 +14,7 @@ export const getAnimalData = async () => {
         {
           fieldName: "animalID",
           operation: "equals",
-          criteria: "181",
+          criteria: "25854",
         },
       ],
       fields: [
