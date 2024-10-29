@@ -1,8 +1,9 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import { getAnimalData } from "../api/animalProfileApi";
 import { useEffect, useState } from "react";
 import { useLocalSearchParams } from "expo-router";
-import Slider from "../components/Slider";
+import Slider from "@/components/Slider";
+import InfoSection from "@/components/InfoSection";
 
 export default function AnimalProfile() {
   const animal = useLocalSearchParams();
@@ -28,10 +29,15 @@ export default function AnimalProfile() {
   console.log(animal.animalID);
 
   return (
-    <View>
+    <ScrollView style={styles.container}>
       <Slider name={dataList.animalName} pictures={pictures} />
-    </View>
+      <InfoSection name={dataList.animalName} />
+    </ScrollView>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

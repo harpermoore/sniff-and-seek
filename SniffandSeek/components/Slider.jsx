@@ -45,13 +45,13 @@ export default function Slider({ name, pictures }) {
         pagingEnabled
         onScroll={onScrollHandler}
         viewabilityConfigCallbackPairs={viewabilityConfigCallbackPairs.current}
+        removeClippedSubviews={false}
       />
       <Pagination
         paginationIndex={paginationIndex}
         scrollX={scrollX}
         items={pictures}
       />
-      <Text>Animal name: {name}</Text>
     </View>
   );
 }

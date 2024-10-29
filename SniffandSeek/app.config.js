@@ -1,6 +1,10 @@
 export default {
   expo: {
     // ... other expo config
+    name: "sniffandseek",
+    slug: "sniffandseek",
+    version: "1.0.0",
+    scheme: "sniffandseek",
     extra: {
       firebaseApiKey: process.env.FIREBASE_API_KEY,
       firebaseAuthDomain: process.env.FIREBASE_AUTH_DOMAIN,
