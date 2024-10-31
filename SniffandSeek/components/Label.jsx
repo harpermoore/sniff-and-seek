@@ -10,13 +10,14 @@ export default function Label({ children }) {
 
 const styles = StyleSheet.create({
   label: {
-    width: 120,
+    width: "auto",
     height: 42,
     alignItems: "center",
     justifyContent: "center",
-    padding: 12,
-    marginTop: 12,
-    borderRadius: 20,
+    alignSelf: "flex-start",
+    paddingHorizontal: 16,
+    marginBottom: 12,
+    borderRadius: 16,
     backgroundColor: "#B50000",
   },
   textStyle: {

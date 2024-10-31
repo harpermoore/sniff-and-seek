@@ -24,6 +24,13 @@ export const getAnimalData = async (animalID) => {
         "animalPictures",
         "animalLocation",
         "animalPrimaryBreed",
+        "animalDescription",
+        "animalColor",
+        "animalGeneralAge",
+        "animalSizeCurrent",
+        "animalSex",
+        "animalStatus",
+        "animalSummary",
       ],
     },
   };

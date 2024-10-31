@@ -22,7 +22,6 @@ export default function Card({
 
       <View style={styles.textContainer}>
         <Text>{animalName}</Text>
-        <Text>AnimalID: {animalID}</Text>
       </View>
 
       <Link href={`/${animalID}`} asChild>

@@ -12,6 +12,12 @@ export const getCatData = async (submittedValue) => {
       resultLimit: 20,
       filters: [
         {
+          fieldName: "animalStatus",
+          operation: "notequals",
+          criteria: "adopted",
+        },
+
+        {
           fieldName: "animalSpecies",
           operation: "equals",
           criteria: "cat",
@@ -55,6 +61,11 @@ export const getDogData = async (submittedValue) => {
       resultStart: 0,
       resultLimit: 20,
       filters: [
+        {
+          fieldName: "animalStatus",
+          operation: "notequals",
+          criteria: "adopted",
+        },
         {
           fieldName: "animalSpecies",
           operation: "equals",

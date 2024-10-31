@@ -1,17 +1,17 @@
 import { View, Text, StyleSheet } from "react-native";
 import Label from "./Label";
 
-export default function InfoBlock() {
+export default function InfoBlock({ label, content }) {
   return (
     <View>
-      <Label>Label name</Label>
-      <Text style={styles.textStyle}>Text content</Text>
+      <Label>{label}</Label>
+      <Text style={styles.textStyle}>{content}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   textStyle: {
-    fontSize: 12,
+    fontSize: 16,
   },
 });

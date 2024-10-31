@@ -1,9 +1,10 @@
-import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
+import { Text, StyleSheet, ScrollView } from "react-native";
 import { getAnimalData } from "../api/animalProfileApi";
 import { useEffect, useState } from "react";
 import { useLocalSearchParams } from "expo-router";
 import Slider from "@/components/Slider";
 import InfoSection from "@/components/InfoSection";
+import AnimalProvider from "../context/AnimalProvider";
 
 export default function AnimalProfile() {
   const animal = useLocalSearchParams();
@@ -21,7 +22,7 @@ export default function AnimalProfile() {
     return <Text>Loading...</Text>;
   }
 
-  const dataList = Object.values(animalData.data.data)[0]; // 獲取 181 對象
+  const dataList = Object.values(animalData.data.data)[0];
   console.log(dataList);
   console.log(dataList.animalPictures[0].large.url);
   const pictures = Object.values(dataList.animalPictures);
@@ -31,7 +32,9 @@ export default function AnimalProfile() {
   return (
     <ScrollView style={styles.container}>
       <Slider name={dataList.animalName} pictures={pictures} />
-      <InfoSection name={dataList.animalName} />
+      <AnimalProvider animalData={dataList}>
+        <InfoSection />
+      </AnimalProvider>
     </ScrollView>
   );
 }
