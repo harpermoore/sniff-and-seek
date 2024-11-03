@@ -1,12 +1,16 @@
 import { View, StyleSheet, Text, Image, Pressable } from "react-native";
 import { Link } from "expo-router";
 
+const placeholderdog = "../assets/images/placeholderdog.png";
+const placeholdercat = "../assets/images/placeholdercat.png";
+
 export default function Card({
   animalName,
   animalID,
   animalBreed,
   imgUri,
   haveImg,
+  species,
 }) {
   return (
     <View style={styles.container}>
@@ -17,13 +21,19 @@ export default function Card({
           resizeMode="cover"
         />
       ) : (
-        <Text>I DON'T HAVE PIC</Text>
+        <Image
+          style={styles.imgStyle}
+          source={{ uri: species === "dogs" ? placeholderdog : placeholdercat }}
+          resizeMode="cover"
+        />
       )}
 
+      {/* Animal name */}
       <View style={styles.textContainer}>
         <Text>{animalName}</Text>
       </View>
 
+      {/* Check details button */}
       <Link href={`/${animalID}`} asChild>
         <Pressable style={styles.buttonStyle}>
           <Text style={styles.textStyle}>Check {animalName}</Text>
@@ -37,8 +47,8 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 20,
     alignItems: "center",
-    width: 140,
-    height: 270,
+    width: 160,
+    height: "auto",
     backgroundColor: "#fff",
     borderRadius: 10,
     borderColor: "#e6e6e6",
@@ -47,7 +57,7 @@ const styles = StyleSheet.create({
   },
   imgStyle: {
     width: "100%",
-    height: 160,
+    height: 200,
     margin: 0,
     padding: 0,
   },
@@ -63,8 +73,10 @@ const styles = StyleSheet.create({
     paddingTop: 6,
     paddingBottom: 6,
     borderRadius: 20,
+    overflow: "hidden",
   },
   textStyle: {
     color: "#fff",
+    overflow: "hidden",
   },
 });

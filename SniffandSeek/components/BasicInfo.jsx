@@ -4,8 +4,13 @@ import { useContext } from "react";
 import { AnimalContext } from "../context/AnimalProvider";
 
 export default function BasicInfo() {
-  const { animalName, animalBreed, animalColor, animalDescription } =
-    useContext(AnimalContext);
+  const {
+    animalName,
+    animalBreed,
+    animalColor,
+    animalDescription,
+    animalGeneralAge,
+  } = useContext(AnimalContext);
 
   return (
     <View style={styles.container}>
@@ -13,7 +18,7 @@ export default function BasicInfo() {
 
       <InfoBlock label={"Color"} content={animalColor} />
 
-      <InfoBlock label={"Color"} content={animalName} />
+      <InfoBlock label={"General age"} content={animalGeneralAge} />
 
       <InfoBlock
         label={`More about ${animalName}`}

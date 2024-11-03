@@ -30,7 +30,9 @@ export const getAnimalData = async (animalID) => {
         "animalSizeCurrent",
         "animalSex",
         "animalStatus",
-        "animalSummary",
+        "animalAdoptionFee",
+        "animalAvailableDate",
+        "animalOrgID",
       ],
     },
   };
