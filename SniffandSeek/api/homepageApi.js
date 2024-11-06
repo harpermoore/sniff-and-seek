@@ -40,6 +40,7 @@ export const getCatData = async (submittedValue) => {
         "animalPictures",
         "animalLocation",
         "animalPrimaryBreed",
+        "animalGeneralAge",
       ],
     },
   };
@@ -89,6 +90,7 @@ export const getDogData = async (submittedValue) => {
         "animalPictures",
         "animalLocation",
         "animalPrimaryBreed",
+        "animalGeneralAge",
       ],
     },
   };

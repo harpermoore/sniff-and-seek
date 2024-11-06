@@ -1,7 +1,10 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Dimensions } from "react-native";
 import InfoBlock from "./InfoBlock";
 import { useContext } from "react";
 import { AnimalContext } from "../context/AnimalProvider";
+import RenderHtml from "react-native-render-html";
+
+const { width } = Dimensions.get("screen");
 
 export default function BasicInfo() {
   const {
@@ -23,9 +26,14 @@ export default function BasicInfo() {
       <InfoBlock
         label={`More about ${animalName}`}
         content={
-          animalDescription.length > 0
-            ? animalDescription
-            : "They didn't say anything about me :( Adpot me and get to know me more!"
+          animalDescription.length > 0 ? (
+            <RenderHtml
+              contentWidth={width}
+              source={{ html: animalDescription }}
+            />
+          ) : (
+            "They didn't say anything about me :( Adpot me and get to know me more!"
+          )
         }
       />
     </View>

@@ -1,8 +1,9 @@
 import { View, StyleSheet, Text, Image, Pressable } from "react-native";
 import { Link } from "expo-router";
+import Foundation from "@expo/vector-icons/Foundation";
 
-const placeholderdog = "../assets/images/placeholderdog.png";
-const placeholdercat = "../assets/images/placeholdercat.png";
+const placeholderdog = require("../assets/images/placeholderdog.png");
+const placeholdercat = require("../assets/images/placeholdercat.png");
 
 export default function Card({
   animalName,
@@ -11,35 +12,46 @@ export default function Card({
   imgUri,
   haveImg,
   species,
+  age,
 }) {
   return (
-    <View style={styles.container}>
-      {haveImg ? (
-        <Image
-          style={styles.imgStyle}
-          source={{ uri: imgUri }}
-          resizeMode="cover"
-        />
-      ) : (
-        <Image
-          style={styles.imgStyle}
-          source={{ uri: species === "dogs" ? placeholderdog : placeholdercat }}
-          resizeMode="cover"
-        />
-      )}
+    <Link href={`/${animalID}`} asChild>
+      <Pressable>
+        <View style={styles.container}>
+          {haveImg ? (
+            <Image
+              style={styles.imgStyle}
+              source={{ uri: imgUri }}
+              resizeMode="cover"
+            />
+          ) : (
+            <Image
+              style={styles.imgStyle}
+              source={species === "dogs" ? placeholderdog : placeholdercat}
+              resizeMode="cover"
+            />
+          )}
 
-      {/* Animal name */}
-      <View style={styles.textContainer}>
-        <Text>{animalName}</Text>
-      </View>
+          {/* Animal name */}
+          <View style={styles.textContainer}>
+            <Text numberOfLines={1}>{animalName}</Text>
 
-      {/* Check details button */}
-      <Link href={`/${animalID}`} asChild>
-        <Pressable style={styles.buttonStyle}>
-          <Text style={styles.textStyle}>Check {animalName}</Text>
-        </Pressable>
-      </Link>
-    </View>
+            <View
+              style={{
+                flexDirection: "row",
+                gap: 6,
+                justifyContent: "center",
+                alignItems: "center",
+                marginTop: 8,
+              }}
+            >
+              <Foundation name="paw" size={24} color="#B50000" />
+              <Text>{age}</Text>
+            </View>
+          </View>
+        </View>
+      </Pressable>
+    </Link>
   );
 }
 
@@ -48,12 +60,17 @@ const styles = StyleSheet.create({
     marginTop: 20,
     alignItems: "center",
     width: 160,
-    height: "auto",
+    height: 280,
     backgroundColor: "#fff",
     borderRadius: 10,
     borderColor: "#e6e6e6",
     borderWidth: 0.5,
     overflow: "hidden",
+    paddingBottom: 12,
+    shadowColor: "#171717",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.8,
+    shadowRadius: 3,
   },
   imgStyle: {
     width: "100%",

@@ -1,12 +1,21 @@
 import { Text, View, StyleSheet, ScrollView } from "react-native";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { getCatData, getDogData } from "@/api/homepageApi";
+import { getResource } from "@/api/resourceApi";
+import { getEventImg } from "@/api/eventImgApi";
 import HomePageList from "@/components/HomePageList";
 import LocationInput from "@/components/LocationInput";
+import EventSection from "@/components/EventSection";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "./firebase-config";
+
+const app = initializeApp(firebaseConfig);
 
 export default function Index() {
   const [catData, setCatData] = useState(null);
   const [dogData, setDogData] = useState(null);
+  const [resourceData, setResourceData] = useState(null);
+  const eventImgData = useRef(null);
   const [location, setLocation] = useState("");
   const [submittedValue, setSubmittedValue] = useState("47408");
 
@@ -14,23 +23,28 @@ export default function Index() {
     const fetchData = async () => {
       const catResponse = await getCatData(submittedValue);
       const dogResponse = await getDogData(submittedValue);
+      const resourceResponse = await getResource();
+      const eventImgResponse = await getEventImg("dog");
       setCatData(catResponse);
       setDogData(dogResponse);
-      //   console.log(catData.data[Object.keys(catData.data)[0]]);
+      setResourceData(resourceResponse);
+      console.log(eventImgResponse);
+      eventImgData.current = eventImgResponse;
     };
     fetchData();
   }, [submittedValue]);
 
   //loading screen
-  if (!catData || !dogData) {
+  if (!catData || !dogData || !resourceData) {
     return <Text>Loading...</Text>;
   }
 
   const catList = Object.values(catData.data);
   const dogList = Object.values(dogData.data);
+  const eventList = Object.values(resourceData.data);
 
-  console.log(catList);
-  console.log(dogList);
+  console.log(eventList);
+  console.log(eventImgData.current);
 
   return (
     <ScrollView>
@@ -48,7 +62,9 @@ export default function Index() {
       <Text style={styles.headingStyle}>Adoptable dogs and puppies</Text>
       <HomePageList list={dogList} species={"dogs"} />
 
+      {/* Resource section */}
       <Text style={styles.headingStyle}>Resources</Text>
+      <EventSection list={eventList} />
     </ScrollView>
   );
 }

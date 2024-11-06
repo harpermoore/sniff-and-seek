@@ -28,6 +28,7 @@ export default function HomePageList({ list, species }) {
                 imgUri={hasImage ? animal.animalPictures[0].small.url : null}
                 haveImg={hasImage}
                 species={species}
+                age={animal.animalGeneralAge}
               />
             );
           })}
