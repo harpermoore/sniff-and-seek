@@ -7,12 +7,27 @@ import {
   Image,
 } from "react-native";
 import { useState } from "react";
+import { signInWithGoogle, handleRedirectResult } from "@/service/firebaseAuth";
 
 const googleUri = require("@/assets/images/google.png");
 
-export default function SignIn() {
+export default function signIn() {
   const [isPressed, setIsPressed] = useState(false);
+  useEffect(() => {
+    // 處理 Firebase 的重定向結果
+    const fetchData = async () => {
+      const result = await handleRedirectResult();
+      if (result && result.user) {
+        console.log("User signed in:", result.user);
+        // 在這裡可以進一步處理用戶信息，比如儲存用戶資料到狀態管理中
+      } else if (result && result.errorCode) {
+        console.log("Error signing in:", result.errorMessage);
+        // 顯示錯誤消息或進行錯誤處理
+      }
+    };
 
+    fetchData();
+  }, []);
   return (
     <View style={styles.wrapper}>
       <Text style={styles.text}>Enter your e-mail address here</Text>
@@ -57,7 +72,7 @@ export default function SignIn() {
       </Text>
 
       {/* Sing in with Google */}
-      <Pressable style={styles.googleBtn}>
+      <Pressable style={styles.googleBtn} onPress={signInWithGoogle}>
         <Image style={styles.img} source={googleUri} />
         <Text>Sing in with Google</Text>
       </Pressable>
@@ -116,6 +131,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: 16,
     paddingVertical: 12,
+    gap: 8,
   },
   img: {
     width: 24,

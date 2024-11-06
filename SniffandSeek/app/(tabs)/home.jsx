@@ -7,7 +7,7 @@ import HomePageList from "@/components/HomePageList";
 import LocationInput from "@/components/LocationInput";
 import EventSection from "@/components/EventSection";
 
-export default function Index() {
+export default function Home() {
   const [catData, setCatData] = useState(null);
   const [dogData, setDogData] = useState(null);
   const [resourceData, setResourceData] = useState(null);

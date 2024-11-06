@@ -1,10 +1,10 @@
 import { Text, StyleSheet, ScrollView } from "react-native";
-import { getAnimalData } from "../api/animalProfileApi";
+import { getAnimalData } from "@/api/animalProfileApi";
 import { useEffect, useState } from "react";
 import { useLocalSearchParams } from "expo-router";
 import Slider from "@/components/Slider";
 import InfoSection from "@/components/InfoSection";
-import AnimalProvider from "../context/AnimalProvider";
+import AnimalProvider from "@/context/AnimalProvider";
 
 export default function AnimalProfile() {
   const animal = useLocalSearchParams();

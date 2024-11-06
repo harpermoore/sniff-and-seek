@@ -1,11 +1,6 @@
-import { Text, View } from "react-native";
-import SignIn from "./(auth)/SignIn";
-import { Stack } from "expo-router";
+import { Redirect } from "expo-router";
+import { app } from "@/firebase-config";
 
-export default function App() {
-  return (
-    <Stack>
-      <Stack.Screen name="SignIn" />
-    </Stack>
-  );
+export default function Index() {
+  return <Redirect href="(auth)/signIn" />;
 }
