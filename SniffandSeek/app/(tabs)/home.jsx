@@ -6,10 +6,6 @@ import { getEventImg } from "@/api/eventImgApi";
 import HomePageList from "@/components/HomePageList";
 import LocationInput from "@/components/LocationInput";
 import EventSection from "@/components/EventSection";
-import { initializeApp } from "firebase/app";
-import { firebaseConfig } from "./firebase-config";
-
-const app = initializeApp(firebaseConfig);
 
 export default function Index() {
   const [catData, setCatData] = useState(null);
