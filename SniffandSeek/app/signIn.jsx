@@ -6,7 +6,7 @@ import {
   Text,
   Image,
 } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { signInWithGoogle, handleRedirectResult } from "@/service/firebaseAuth";
 
 const googleUri = require("@/assets/images/google.png");

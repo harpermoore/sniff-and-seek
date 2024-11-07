@@ -1,8 +1,14 @@
-import { getAuth, getRedirectResult, GoogleAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  getRedirectResult,
+  GoogleAuthProvider,
+  signInWithRedirect,
+} from "firebase/auth";
+import { app } from "@/firebaseConfig";
 
 export const provider = new GoogleAuthProvider();
 
-const auth = getAuth();
+const auth = getAuth(app);
 
 export const signInWithGoogle = () => {
   signInWithRedirect(auth, provider);

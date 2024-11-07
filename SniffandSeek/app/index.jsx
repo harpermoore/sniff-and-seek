@@ -1,6 +1,6 @@
 import { Redirect } from "expo-router";
-import { app } from "@/firebase-config";
+import { View, Text } from "react-native";
 
 export default function Index() {
-  return <Redirect href="(auth)/signIn" />;
+  return <Redirect href="/signIn" />;
 }

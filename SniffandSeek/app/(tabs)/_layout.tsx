@@ -6,7 +6,7 @@ export default function tabLayout() {
   return (
     <Tabs tabBar={(props) => <TabBar {...props} />}>
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{ headerShown: false, tabBarLabelStyle: { color: "#B50000" } }}
       />
       <Tabs.Screen
