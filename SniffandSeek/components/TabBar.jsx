@@ -5,7 +5,7 @@ import Foundation from "@expo/vector-icons/Foundation";
 
 export default function TabBar({ state, descriptors, navigation }) {
   const icons = {
-    index: (props) => <Feather name="home" size={24} color="#ffff" />,
+    home: (props) => <Feather name="home" size={24} color="#ffff" />,
     favorite: (props) => <FontAwesome6 name="heart" size={24} color="#ffff" />,
     report: (props) => (
       <Foundation name="clipboard-notes" size={24} color="#ffff" />
@@ -22,6 +22,8 @@ export default function TabBar({ state, descriptors, navigation }) {
             : options.title !== undefined
             ? options.title
             : route.name;
+
+        if (["_sitemap", "+not-found"].includes(route.name)) return null;
 
         const isFocused = state.index === index;
 
@@ -55,7 +57,7 @@ export default function TabBar({ state, descriptors, navigation }) {
             onLongPress={onLongPress}
             style={styles.item}
           >
-            {icons[route.name]()}
+            {icons[route.name]}
 
             <Text style={{ color: isFocused ? "#673ab7" : "#fff" }}>
               {label}

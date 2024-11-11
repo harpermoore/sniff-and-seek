@@ -1,11 +1,12 @@
 import { View, Text, Pressable, StyleSheet, Image } from "react-native";
+import RenderHtml from "react-native-render-html";
 
 const placeholder = require("@/assets/images/eventplaceholder.png");
 
-export default function ResourceCard({ eventName, eventDescription }) {
+export default function ResourceCard({ eventName, eventDescription, uri }) {
   return (
     <View style={styles.container}>
-      <Image style={styles.imgStyle} source={placeholder} />
+      {/* <Image style={styles.imgStyle} source={{ uri: uri }} /> */}
 
       <View style={styles.textContainer}>
         <Text style={styles.heading}>{eventName}</Text>
@@ -38,13 +39,14 @@ const styles = StyleSheet.create({
   },
   imgStyle: {
     width: 360,
-    height: 150,
+    height: 180,
     margin: 0,
     padding: 0,
   },
   heading: {
     fontSize: 24,
     fontWeight: 600,
+    marginBottom: 8,
   },
   btn: {
     marginTop: 24,

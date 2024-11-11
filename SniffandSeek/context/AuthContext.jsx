@@ -5,6 +5,7 @@ const AuthContext = createContext();
 export const AuthProvider({children}) { 
     const [user, setUser] = useState(null);
     const [isLoading, setLoading] = useState(true);
+    const [likedList, setLikedList] = useState([]);
 
     return (
         <AuthContext.Provider>

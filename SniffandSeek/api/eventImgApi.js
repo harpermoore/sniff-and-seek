@@ -19,6 +19,7 @@ export const getEventImg = async (query) => {
       },
     });
     console.log(response.data);
+    return response.data;
   } catch (error) {
     console.error(error);
   }

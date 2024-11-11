@@ -16,6 +16,11 @@ export const getResource = async () => {
           operation: "greaterthan",
           criteria: "rg:today",
         },
+        {
+          fieldName: "eventDescription",
+          operation: "greaterthan",
+          criteria: 0,
+        },
       ],
 
       fields: [
