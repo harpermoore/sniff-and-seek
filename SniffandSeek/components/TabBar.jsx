@@ -3,8 +3,6 @@ import Feather from "@expo/vector-icons/Feather";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import Foundation from "@expo/vector-icons/Foundation";
 
-// Tab bar is adjusted based on this reference:
-
 export default function TabBar({ state, descriptors, navigation }) {
   const icons = {
     home: (props) => <Feather name="home" size={24} color="#ffff" />,
@@ -26,14 +24,9 @@ export default function TabBar({ state, descriptors, navigation }) {
             : route.name;
 
         if (
-          [
-            "_sitemap",
-            "+not-found",
-            "signIn",
-            "index",
-            "[animalID]",
-            "(tabs)",
-          ].includes(route.name)
+          ["_sitemap", "+not-found", "signIn", "[animalID]", "(tabs)"].includes(
+            route.name
+          )
         )
           return null;
 

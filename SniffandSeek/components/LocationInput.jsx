@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   inputStyle: {
-    width: 260,
+    width: 300,
     backgroundColor: "#fff",
     borderColor: "#8888",
     padding: 12,
@@ -44,6 +44,8 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     backgroundColor: "#B50000",
+    borderWidth: 3,
+    borderColor: "#fff",
     borderRadius: 60,
     padding: 12,
   },

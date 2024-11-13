@@ -1,9 +1,9 @@
 import { View, StyleSheet, Text } from "react-native";
 import { useState, useEffect } from "react";
-import FavoriteCard from "../components/FavoriteCard";
-import { useAuth } from "../context/AuthContext";
+import FavoriteCard from "../../components/FavoriteCard";
+import { useAuth } from "../../context/AuthContext";
 // import { getAnimalData } from "../api/animalProfileApi";
-import { getLikedAnimal } from "../api/likedListApi";
+import { getLikedAnimal } from "../../api/likedListApi";
 
 export default function favorite() {
   const { likedList, setLikedList } = useAuth();
