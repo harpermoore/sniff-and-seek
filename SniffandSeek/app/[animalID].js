@@ -6,6 +6,9 @@ import Slider from "@/components/Slider";
 import InfoSection from "@/components/InfoSection";
 import AnimalProvider from "@/context/AnimalProvider";
 
+const placeholdercat = require("../assets/images/placeholdercat.png");
+const placeholderdog = require("../assets/images/placeholderdog.png");
+
 export default function AnimalProfile() {
   const animal = useLocalSearchParams();
   const [animalData, setAnimalData] = useState(null);
@@ -23,15 +26,14 @@ export default function AnimalProfile() {
   }
 
   const dataList = Object.values(animalData.data.data)[0];
-  console.log(dataList);
-  console.log(dataList.animalPictures[0].large.url);
-  const pictures = Object.values(dataList.animalPictures);
-  console.log(pictures);
-  console.log(animal.animalID);
+  const pictures = Object.values(dataList.animalPictures)
+    ? Object.values(dataList.animalPictures)
+    : placeholdercat;
 
   return (
     <ScrollView style={styles.container}>
       <Slider name={dataList.animalName} pictures={pictures} />
+
       <AnimalProvider animalData={dataList}>
         <InfoSection />
       </AnimalProvider>

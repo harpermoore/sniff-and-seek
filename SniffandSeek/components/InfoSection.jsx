@@ -1,20 +1,20 @@
 import { ScrollView, Text, StyleSheet, View } from "react-native";
 import { useContext } from "react";
-import ProfileTab from "./ProfileTab";
 import LikeBtn from "../components/LikeBtn";
+import BasicInfo from "./BasicInfo";
 import { AnimalContext } from "../context/AnimalProvider";
 
 export default function InfoSection() {
-  const { animalName: name } = useContext(AnimalContext);
+  const { animalName: name, animalID } = useContext(AnimalContext);
 
   return (
     <ScrollView>
       <View style={styles.headingContainer}>
         <Text style={styles.heading}>{name}</Text>
-        <LikeBtn />
+        <LikeBtn animalID={animalID} />
       </View>
 
-      <ProfileTab />
+      <BasicInfo />
     </ScrollView>
   );
 }

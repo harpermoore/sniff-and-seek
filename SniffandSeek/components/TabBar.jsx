@@ -3,6 +3,8 @@ import Feather from "@expo/vector-icons/Feather";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import Foundation from "@expo/vector-icons/Foundation";
 
+// Tab bar is adjusted based on this reference:
+
 export default function TabBar({ state, descriptors, navigation }) {
   const icons = {
     home: (props) => <Feather name="home" size={24} color="#ffff" />,
@@ -23,7 +25,17 @@ export default function TabBar({ state, descriptors, navigation }) {
             ? options.title
             : route.name;
 
-        if (["_sitemap", "+not-found"].includes(route.name)) return null;
+        if (
+          [
+            "_sitemap",
+            "+not-found",
+            "signIn",
+            "index",
+            "[animalID]",
+            "(tabs)",
+          ].includes(route.name)
+        )
+          return null;
 
         const isFocused = state.index === index;
 
@@ -39,12 +51,7 @@ export default function TabBar({ state, descriptors, navigation }) {
           }
         };
 
-        const onLongPress = () => {
-          navigation.emit({
-            type: "tabLongPress",
-            target: route.key,
-          });
-        };
+        const IconComponent = icons[route.name];
 
         return (
           <TouchableOpacity
@@ -54,10 +61,9 @@ export default function TabBar({ state, descriptors, navigation }) {
             accessibilityLabel={options.tabBarAccessibilityLabel}
             testID={options.tabBarTestID}
             onPress={onPress}
-            onLongPress={onLongPress}
             style={styles.item}
           >
-            {icons[route.name]}
+            <IconComponent />
 
             <Text style={{ color: isFocused ? "#673ab7" : "#fff" }}>
               {label}

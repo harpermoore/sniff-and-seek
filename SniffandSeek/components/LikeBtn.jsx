@@ -1,9 +1,17 @@
 import { Pressable, StyleSheet, View } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { useAuth } from "../context/AuthContext";
 
-export default function LikeBtn() {
+export default function LikeBtn({ animalID }) {
+  const { likedList, setLikedList } = useAuth();
+
+  const handleLikded = () => {
+    setLikedList((prevList) => [...prevList, animalID]);
+    console.log(likedList);
+  };
+
   return (
-    <Pressable>
+    <Pressable onPress={handleLikded}>
       <View style={styles.circle}>
         <MaterialCommunityIcons
           name="cards-heart-outline"

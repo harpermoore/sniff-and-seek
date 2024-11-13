@@ -48,6 +48,7 @@ export default function Home() {
       endDate: item.eventEnd,
       eventUrl: item.eventUrl,
       description: item.eventDescription,
+
       // imgObj: ImgObj[index],
     };
   });

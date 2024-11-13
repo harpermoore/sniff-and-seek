@@ -39,8 +39,17 @@ export default function Home() {
   const dogList = Object.values(dogData.data);
   const eventList = Object.values(resourceData.data);
 
-  console.log(eventList);
-  console.log(eventImgData.current);
+  const eventSectionList = eventList.map((item, index) => {
+    return {
+      name: item.eventName,
+      startDate: item.eventStart,
+      endDate: item.eventEnd,
+      eventUrl: item.eventUrl,
+      description: item.eventDescription,
+
+      // imgObj: ImgObj[index],
+    };
+  });
 
   return (
     <ScrollView>
@@ -60,7 +69,7 @@ export default function Home() {
 
       {/* Resource section */}
       <Text style={styles.headingStyle}>Resources</Text>
-      <EventSection list={eventList} />
+      <EventSection list={eventSectionList} />
     </ScrollView>
   );
 }

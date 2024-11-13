@@ -46,7 +46,7 @@ export default function Card({
               }}
             >
               <Foundation name="paw" size={24} color="#B50000" />
-              <Text>{age}</Text>
+              <Text>{age ? age : "unknown"}</Text>
             </View>
           </View>
         </View>

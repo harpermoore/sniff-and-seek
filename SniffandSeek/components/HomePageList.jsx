@@ -33,6 +33,7 @@ export default function HomePageList({ list, species }) {
             );
           })}
         </View>
+
         <Pressable style={styles.buttonStyle}>
           <Text style={styles.textStyle}>Go to adoptable {species} list</Text>
         </Pressable>
@@ -52,8 +53,9 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     marginLeft: 20,
-    backgroundColor: "#333",
-    padding: 16,
+    backgroundColor: "#B50000",
+    paddingHorizontal: 18,
+    paddingVertical: 12,
     borderRadius: 40,
   },
   textStyle: {

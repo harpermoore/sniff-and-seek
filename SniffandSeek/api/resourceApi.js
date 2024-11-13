@@ -29,6 +29,11 @@ export const getResource = async () => {
         "eventStart",
         "eventEnd",
         "eventUrl",
+        "locationName",
+        "locationAddress",
+        "locationState",
+        "eventID",
+        "eventOrgID",
       ],
     },
   };
@@ -36,6 +41,5 @@ export const getResource = async () => {
     "https://api.rescuegroups.org/http/v2.json",
     requestArticleData
   );
-
   return response.data;
 };

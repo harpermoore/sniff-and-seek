@@ -4,9 +4,9 @@ import { View, StyleSheet } from "react-native";
 export default function EventSection({ list }) {
   return (
     <View style={styles.container}>
-      {list.map((item) => (
+      {list.map((item, index) => (
         <ResourceCard
-          key={item.name}
+          key={index}
           // uri={item.imgObj.urls.regular}
           eventName={item.name}
           eventDescription={item.description}
