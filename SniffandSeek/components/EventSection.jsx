@@ -7,7 +7,7 @@ export default function EventSection({ list }) {
       {list.map((item, index) => (
         <ResourceCard
           key={index}
-          // uri={item.imgObj.urls.regular}
+          // uri={""}
           eventName={item.name}
           eventDescription={item.description}
         />

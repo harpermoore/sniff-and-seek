@@ -1,9 +1,11 @@
-import { ScrollView, View, StyleSheet, Text } from "react-native";
+import { ScrollView, View, StyleSheet, Text, Image } from "react-native";
 import { useState, useEffect } from "react";
 import FavoriteCard from "../../components/FavoriteCard";
 import { useAuth } from "../../context/AuthContext";
 // import { getAnimalData } from "../api/animalProfileApi";
 import { getLikedAnimal } from "../../api/likedListApi";
+
+const paw = require("../../assets/images/emptyPaw.png");
 
 export default function favorite() {
   const { likedList, setLikedList } = useAuth();
@@ -32,6 +34,7 @@ export default function favorite() {
     return (
       <View style={styles.emptyList}>
         <Text style={styles.emptyListText}>Your Favorite List is empty</Text>
+        <Image style={styles.img} source={paw} />
       </View>
     );
   };
@@ -51,6 +54,8 @@ export default function favorite() {
                 animalStatus={data[0].animalStatus}
                 imgUri={data[0].animalPictures[0].large.url}
                 key={data[0].animalID}
+                likedList={likedList}
+                setLikedList={setLikedList}
               />
             );
           })}
@@ -74,5 +79,9 @@ const styles = StyleSheet.create({
   },
   emptyListText: {
     fontSize: 32,
+  },
+  img: {
+    width: 300,
+    height: 300,
   },
 });

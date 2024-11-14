@@ -7,16 +7,18 @@ import InfoSection from "@/components/InfoSection";
 import AnimalProvider from "@/context/AnimalProvider";
 
 export default function AnimalProfile() {
-  const animal = useLocalSearchParams();
+  const { animalID } = useLocalSearchParams();
   const [animalData, setAnimalData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const animalResponse = await getAnimalData(animal.animalID);
+      const animalResponse = await getAnimalData(animalID);
       setAnimalData(animalResponse);
     };
-    fetchData();
-  }, []);
+    if (!animalData) {
+      fetchData();
+    }
+  }, [animalID, animalData]);
 
   if (!animalData) {
     return <Text>Loading...</Text>;

@@ -1,5 +1,6 @@
 import { View, StyleSheet, Image, Text, Pressable } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import { Link } from "expo-router";
 
 const placeholder = require("../assets/images/placeholdercat.png");
 
@@ -8,12 +9,21 @@ export default function FavoriteCard({
   animalID,
   animalStatus,
   imgUri,
+  likedList,
+  setLikedList,
 }) {
+  const handleDelete = (ID) => {
+    const newLikedList = likedList.filter((animal) => animal !== ID);
+    setLikedList(newLikedList);
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.delete}>
-        <AntDesign name="delete" size={24} color="#8888" />
-      </View>
+      <Pressable style={styles.delete} onPress={() => handleDelete(animalID)}>
+        <View>
+          <AntDesign name="delete" size={24} color="#8888" />
+        </View>
+      </Pressable>
       {/* Left column */}
       <Image style={styles.img} source={{ uri: imgUri }} />
 
@@ -29,9 +39,11 @@ export default function FavoriteCard({
         </View>
 
         {/* Check detail button */}
-        <Pressable style={styles.btn}>
-          <Text style={styles.btnText}>Check details</Text>
-        </Pressable>
+        <Link href={`/${animalID}`} asChild>
+          <Pressable style={styles.btn}>
+            <Text style={styles.btnText}>Check details</Text>
+          </Pressable>
+        </Link>
       </View>
     </View>
   );
