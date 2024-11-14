@@ -1,20 +1,32 @@
 import { View, StyleSheet, Image, Text, Pressable } from "react-native";
+import AntDesign from "@expo/vector-icons/AntDesign";
 
 const placeholder = require("../assets/images/placeholdercat.png");
 
-export default function FavoriteCard() {
+export default function FavoriteCard({
+  animalName,
+  animalID,
+  animalStatus,
+  imgUri,
+}) {
   return (
     <View style={styles.container}>
       {/* Left column */}
-      <Image style={styles.img} source={placeholder} />
+      <Image style={styles.img} source={{ uri: imgUri }} />
 
       {/* Right column */}
       <View style={styles.rightContainer}>
-        <View>
-          <Text>Name:</Text>
-          <Text>Animal ID:</Text>
-          <Text>Status:</Text>
+        {/* info and delete         */}
+        <View style={styles.info}>
+          <View>
+            <Text style={{ fontSize: 18 }}>{animalName}</Text>
+            <Text>Animal ID: {animalID}</Text>
+            <Text>Status: {animalStatus}</Text>
+          </View>
+          <AntDesign name="delete" size={24} color="black" />
         </View>
+
+        {/* Check detail button */}
         <Pressable style={styles.btn}>
           <Text style={styles.btnText}>Check details</Text>
         </Pressable>
@@ -27,13 +39,13 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     gap: 18,
-    marginTop: 140,
-    width: 380,
+    marginBottom: 18,
+    width: 400,
     height: 220,
     backgroundColor: "#ffff",
-    borderWidth: 1,
     borderRadius: 16,
     borderCurve: "continuous",
+    shadowColor: "black",
   },
   img: {
     width: 160,
@@ -57,5 +69,10 @@ const styles = StyleSheet.create({
   btnText: {
     color: "#fff",
     fontSize: 18,
+  },
+  info: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    gap: 12,
   },
 });

@@ -6,5 +6,10 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", "app/index.js", "app/_layout.jsx"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "app/(tabs)/index.js",
+    "app-example/_layout.jsx"
+  ]
 }

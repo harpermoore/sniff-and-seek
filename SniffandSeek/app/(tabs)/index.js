@@ -6,6 +6,7 @@ import { getResource } from "@/api/resourceApi";
 import HomePageList from "@/components/HomePageList";
 import LocationInput from "@/components/LocationInput";
 import EventSection from "@/components/EventSection";
+import AdoptableNavigation from "@/components/AdoptableNavigation";
 
 const width = Dimensions.get("screen");
 
@@ -67,6 +68,8 @@ export default function Home() {
         />
       </View>
 
+      <AdoptableNavigation />
+
       <Text style={styles.headingStyle}>Adoptable cats and kittens</Text>
       <HomePageList list={catList} species={"cats"} />
       <Text style={styles.headingStyle}>Adoptable dogs and puppies</Text>
@@ -82,11 +85,11 @@ export default function Home() {
 const styles = StyleSheet.create({
   inputContainer: {
     width: width,
-    height: 200,
+    height: 300,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#B50000",
-    paddingVertical: 24,
+    paddingTop: 64,
   },
   headingStyle: {
     marginTop: 16,

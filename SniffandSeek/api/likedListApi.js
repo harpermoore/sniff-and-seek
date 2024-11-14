@@ -2,7 +2,7 @@ import axios from "axios";
 
 const apikey = process.env.EXPO_PUBLIC_API_KEY;
 
-export const getLikedAnimal = async (list) => {
+export const getLikedAnimal = async (animalID) => {
   const requestAnimalData = {
     apikey: apikey,
     objectType: "animals",
@@ -14,14 +14,14 @@ export const getLikedAnimal = async (list) => {
         {
           fieldName: "animalID",
           operation: "equals",
-          criteria: list,
+          criteria: animalID,
         },
       ],
       fields: [
         "animalID",
         "animalName",
         // "animalBreed",
-        // "animalPictures",
+        "animalPictures",
         // "animalLocation",
         // "animalPrimaryBreed",
         // "animalDescription",
@@ -29,7 +29,7 @@ export const getLikedAnimal = async (list) => {
         // "animalGeneralAge",
         // "animalSizeCurrent",
         // "animalSex",
-        // "animalStatus",
+        "animalStatus",
         // // "animalAdoptionFee",
         // "animalAvailableDate",
         // "animalOrgID",

@@ -24,11 +24,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingHorizontal: 32,
+    paddingHorizontal: 48,
   },
 
   heading: {
     fontSize: 48,
-    fontWeight: "600",
   },
 });
