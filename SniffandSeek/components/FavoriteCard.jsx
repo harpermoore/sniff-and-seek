@@ -11,6 +11,9 @@ export default function FavoriteCard({
 }) {
   return (
     <View style={styles.container}>
+      <View style={styles.delete}>
+        <AntDesign name="delete" size={24} color="#8888" />
+      </View>
       {/* Left column */}
       <Image style={styles.img} source={{ uri: imgUri }} />
 
@@ -23,7 +26,6 @@ export default function FavoriteCard({
             <Text>Animal ID: {animalID}</Text>
             <Text>Status: {animalStatus}</Text>
           </View>
-          <AntDesign name="delete" size={24} color="black" />
         </View>
 
         {/* Check detail button */}
@@ -38,7 +40,7 @@ export default function FavoriteCard({
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    gap: 18,
+    gap: 6,
     marginBottom: 18,
     width: 400,
     height: 220,
@@ -46,6 +48,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     borderCurve: "continuous",
     shadowColor: "black",
+    position: "relative",
   },
   img: {
     width: 160,
@@ -74,5 +77,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     gap: 12,
+  },
+  delete: {
+    position: "absolute",
+    right: 16,
+    top: 20,
   },
 });

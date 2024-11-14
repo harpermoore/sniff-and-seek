@@ -1,5 +1,6 @@
 import { ScrollView, View, StyleSheet, Pressable, Text } from "react-native";
 import { useState } from "react";
+import AntDesign from "@expo/vector-icons/AntDesign";
 import Card from "@/components/Card";
 
 export default function HomePageList({ list, species }) {
@@ -35,7 +36,7 @@ export default function HomePageList({ list, species }) {
         </View>
 
         <Pressable style={styles.buttonStyle}>
-          <Text style={styles.textStyle}>Go to adoptable {species} list</Text>
+          <AntDesign name="arrowright" size={24} color="#ffff" />
         </Pressable>
       </ScrollView>
     </>
