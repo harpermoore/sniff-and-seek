@@ -2,7 +2,7 @@ import { Text, View, StyleSheet, ScrollView, Dimensions } from "react-native";
 import { useState, useEffect, useRef } from "react";
 import { getCatData, getDogData } from "@/api/homepageApi";
 import { getResource } from "@/api/resourceApi";
-// import { getEventImg } from "@/api/eventImgApi";
+import { getEventImg } from "@/api/eventImgApi";
 import HomePageList from "@/components/HomePageList";
 import LocationInput from "@/components/LocationInput";
 import EventSection from "@/components/EventSection";
@@ -28,7 +28,6 @@ export default function Home() {
       setCatData(catResponse);
       setDogData(dogResponse);
       setResourceData(resourceResponse);
-      // setEventImgData(eventImgResponse.result);
     };
     fetchData();
   }, [submittedValue]);
@@ -40,9 +39,6 @@ export default function Home() {
   const catList = Object.values(catData.data);
   const dogList = Object.values(dogData.data);
   const eventList = Object.values(resourceData.data);
-  // const eventImgList = Object.values(eventImgData);
-
-  // const ImgObj = eventImgList[2]; //array
 
   const eventSectionList = eventList.map((item, index) => {
     return {

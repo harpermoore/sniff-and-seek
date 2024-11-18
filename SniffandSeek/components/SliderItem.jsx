@@ -36,7 +36,8 @@ export default function SliderItem({ index, imgUri, scrollX }) {
 
   return (
     <Animated.View style={[style.container, rnAnimatedStyle]}>
-      <Image style={style.image} source={{ uri: imgUri }} />
+      {imgUri ? <Image style={style.image} source={{ uri: imgUri }} /> : null}
+
       <LinearGradient
         colors={["transparent", "rgba(255, 255, 255, 0.3)"]}
         style={style.background}

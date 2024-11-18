@@ -15,7 +15,7 @@ export const getEventImg = async (query) => {
         orientation: "landscape",
       },
       headers: {
-        Authorization: `Client-ID ${apiKey}`, // 替換成你的 Unsplash API 金鑰
+        Authorization: `Client-ID ${apiKey}`,
       },
     });
     console.log(response.data);
