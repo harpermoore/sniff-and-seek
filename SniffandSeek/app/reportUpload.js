@@ -146,21 +146,21 @@ export default function reportUpload() {
           </Pressable>
 
           <Text style={styles.heading}>Selected Images</Text>
-          <ScrollView
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            style={styles.imgContainer}
-          >
-            {image
-              ? image.map((item, index) => (
-                  <Image
-                    key={index}
-                    style={styles.img}
-                    source={{ uri: item.uri }}
-                  />
-                ))
-              : null}
-          </ScrollView>
+
+          {image ? (
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            >
+              {image.map((item, index) => (
+                <Image
+                  key={index}
+                  style={styles.img}
+                  source={{ uri: item.uri }}
+                />
+              ))}
+            </ScrollView>
+          ) : null}
 
           {/* Camera setting */}
           <Pressable onPress={getCameraPermission}>

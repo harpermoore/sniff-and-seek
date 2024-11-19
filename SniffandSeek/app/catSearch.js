@@ -1,6 +1,6 @@
 import { FlatList, View, Text, StyleSheet, ScrollView } from "react-native";
 import { useState, useEffect } from "react";
-import LocationInput from "../components/LocationInput";
+
 import { getCatData } from "../api/homepageApi";
 import Card from "@/components/Card";
 
@@ -9,7 +9,7 @@ export default function catSearch() {
 
   useEffect(() => {
     const getCat = async () => {
-      const catResponse = await getCatData("46208", 30);
+      const catResponse = await getCatData("46208", 100);
 
       setCatData(catResponse);
       console.log(catResponse);
@@ -26,7 +26,6 @@ export default function catSearch() {
 
   return (
     <>
-      <LocationInput />
       <FlatList
         data={catDataList}
         numColumns={2}
