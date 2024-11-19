@@ -2,14 +2,14 @@ import axios from "axios";
 
 const apikey = process.env.EXPO_PUBLIC_API_KEY;
 
-export const getCatData = async (submittedValue) => {
+export const getCatData = async (submittedValue, amount) => {
   const requestCatData = {
     apikey: apikey,
     objectType: "animals",
     objectAction: "publicSearch",
     search: {
       resultStart: 0,
-      resultLimit: 20,
+      resultLimit: amount,
       filters: [
         {
           fieldName: "animalStatus",
@@ -53,14 +53,14 @@ export const getCatData = async (submittedValue) => {
   return response.data;
 };
 
-export const getDogData = async (submittedValue) => {
+export const getDogData = async (submittedValue, amount) => {
   const requestCatData = {
     apikey: apikey,
     objectType: "animals",
     objectAction: "publicSearch",
     search: {
       resultStart: 0,
-      resultLimit: 20,
+      resultLimit: amount,
       filters: [
         {
           fieldName: "animalStatus",

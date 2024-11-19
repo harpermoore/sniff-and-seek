@@ -73,7 +73,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   emptyList: {
-    marginTop: 320,
+    flex: 1,
+    marginTop: 160,
     justifyContent: "center",
     alignItems: "center",
   },

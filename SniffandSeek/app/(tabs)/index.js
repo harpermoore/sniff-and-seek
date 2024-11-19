@@ -2,28 +2,26 @@ import { Text, View, StyleSheet, ScrollView, Dimensions } from "react-native";
 import { useState, useEffect, useRef } from "react";
 import { getCatData, getDogData } from "@/api/homepageApi";
 import { getResource } from "@/api/resourceApi";
-import { getEventImg } from "@/api/eventImgApi";
 import HomePageList from "@/components/HomePageList";
 import LocationInput from "@/components/LocationInput";
 import EventSection from "@/components/EventSection";
 import AdoptableNavigation from "@/components/AdoptableNavigation";
+import { imgData } from "../../data/eventImg";
 
-const width = Dimensions.get("screen");
+const { width } = Dimensions.get("screen");
 
 export default function Home() {
   const [catData, setCatData] = useState(null);
   const [dogData, setDogData] = useState(null);
   const [resourceData, setResourceData] = useState(null);
-  // const [eventImgData, setEventImgData] = useState(null);
   const [location, setLocation] = useState("");
   const [submittedValue, setSubmittedValue] = useState("47408");
 
   useEffect(() => {
     const fetchData = async () => {
-      const catResponse = await getCatData(submittedValue);
-      const dogResponse = await getDogData(submittedValue);
+      const catResponse = await getCatData(submittedValue, 20);
+      const dogResponse = await getDogData(submittedValue, 20);
       const resourceResponse = await getResource();
-      // const eventImgResponse = await getEventImg("dog");
 
       setCatData(catResponse);
       setDogData(dogResponse);
@@ -47,10 +45,11 @@ export default function Home() {
       endDate: item.eventEnd,
       eventUrl: item.eventUrl,
       description: item.eventDescription,
-
-      // imgObj: ImgObj[index],
+      imgUrl: imgData[index],
     };
   });
+
+  console.log(imgData[0]);
 
   return (
     <ScrollView>

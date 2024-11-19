@@ -1,13 +1,10 @@
 import { View, Text, Pressable, StyleSheet, Image } from "react-native";
 import RenderHtml from "react-native-render-html";
 
-const placeholder = require("@/assets/images/eventplaceholder.png");
-
-export default function ResourceCard({ eventName, eventDescription, uri }) {
+export default function ResourceCard({ eventName, eventDescription, imgUrl }) {
   return (
     <View style={styles.container}>
-      {/* <Image style={styles.imgStyle} source={{ uri: uri }} /> */}
-
+      <Image style={styles.imgStyle} source={imgUrl} />
       <View style={styles.textContainer}>
         <Text style={styles.heading}>{eventName}</Text>
         <Text numberOfLines={3}>{eventDescription}</Text>

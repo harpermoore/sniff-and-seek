@@ -2,6 +2,7 @@ import { ScrollView, View, StyleSheet, Pressable, Text } from "react-native";
 import { useState } from "react";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Card from "@/components/Card";
+import { Link } from "expo-router";
 
 export default function HomePageList({ list, species }) {
   return (
@@ -13,6 +14,7 @@ export default function HomePageList({ list, species }) {
         contentContainerStyle={{
           justifyContent: "center",
           alignItems: "center",
+          paddingHorizontal: 12,
         }}
       >
         <View style={styles.cardContainer}>
@@ -35,9 +37,11 @@ export default function HomePageList({ list, species }) {
           })}
         </View>
 
-        <Pressable style={styles.buttonStyle}>
-          <AntDesign name="arrowright" size={24} color="#ffff" />
-        </Pressable>
+        <Link href={species === "cats" ? "catSearch" : "dogSearch"} asChild>
+          <Pressable style={styles.buttonStyle}>
+            <AntDesign name="arrowright" size={24} color="#ffff" />
+          </Pressable>
+        </Link>
       </ScrollView>
     </>
   );
@@ -55,7 +59,7 @@ const styles = StyleSheet.create({
   buttonStyle: {
     marginLeft: 20,
     backgroundColor: "#B50000",
-    paddingHorizontal: 18,
+    paddingHorizontal: 20,
     paddingVertical: 12,
     borderRadius: 40,
   },

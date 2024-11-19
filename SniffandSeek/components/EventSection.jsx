@@ -7,9 +7,9 @@ export default function EventSection({ list }) {
       {list.map((item, index) => (
         <ResourceCard
           key={index}
-          // uri={""}
           eventName={item.name}
           eventDescription={item.description}
+          imgUrl={item.imgUrl}
         />
       ))}
     </View>
