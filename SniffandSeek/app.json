@@ -39,8 +39,8 @@
       [
         "expo-camera",
         {
-          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
-          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
+          "cameraPermission": "Allow SniffandSeek to access your camera",
+          "microphonePermission": "Allow  SniffandSeek to access your microphone",
           "recordAudioAndroid": true
         }
       ],
@@ -53,7 +53,7 @@
       [
         "expo-location",
         {
-          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+          "locationAlwaysAndWhenInUsePermission": "Allow SniffandSeek to use your location."
         }
       ]
     ],
