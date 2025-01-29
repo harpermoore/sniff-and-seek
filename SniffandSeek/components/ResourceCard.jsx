@@ -7,7 +7,6 @@ export default function ResourceCard({ eventName, eventDescription, imgUrl }) {
       <Image style={styles.imgStyle} source={imgUrl} />
       <View style={styles.textContainer}>
         <Text style={styles.heading}>{eventName}</Text>
-        <Text numberOfLines={3}>{eventDescription}</Text>
       </View>
 
       <Pressable style={styles.btn}>

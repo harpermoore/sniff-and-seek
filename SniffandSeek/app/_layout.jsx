@@ -6,6 +6,15 @@ export default function RootLayout() {
     <AuthProvider>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="[animalID]"
+          options={{
+            headerTitle: "",
+            headerTransparent: true,
+            headerBackTitleVisible: false,
+            headerBackTitle: "Home",
+          }}
+        />
       </Stack>
     </AuthProvider>
   );

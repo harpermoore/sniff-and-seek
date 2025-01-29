@@ -49,12 +49,10 @@ export default function Home() {
     };
   });
 
-  console.log(imgData[0]);
-
   return (
     <ScrollView>
       <View style={styles.inputContainer}>
-        <Text style={styles.heading}>Start from entering your location!</Text>
+        <Text style={styles.heading}>Enter Your Location</Text>
         <LocationInput
           location={location}
           setLocation={setLocation}
@@ -96,7 +94,7 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontSize: 32,
-    color: "#fff",
+    color: "#ffff",
     marginBottom: 12,
   },
 });

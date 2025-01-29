@@ -42,7 +42,11 @@ export default function favorite() {
   if (likedList.length === 0) return <EmptyListComponent />;
   else
     return (
-      <ScrollView style={{ marginTop: 120 }}>
+      <ScrollView style={{ marginTop: 96 }}>
+        <View style={styles.headingContainer}>
+          <Text style={styles.heading}>Favorite</Text>
+        </View>
+
         <View style={styles.container}>
           {likedData.map((animal) => {
             const data = Object.values(animal.data.data); // Assuming you need this for something else
@@ -84,5 +88,13 @@ const styles = StyleSheet.create({
   img: {
     width: 300,
     height: 300,
+  },
+  heading: {
+    fontSize: 32,
+  },
+  headingContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 32,
   },
 });

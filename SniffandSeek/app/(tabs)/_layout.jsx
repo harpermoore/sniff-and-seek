@@ -8,7 +8,13 @@ export default function TabsLayout() {
   const [activated, setActivated] = useState("index");
 
   return (
-    <Tabs>
+    <Tabs
+      //tab title color
+      screenOptions={{
+        tabBarActiveTintColor: "#B50000",
+        tabBarInactiveTintColor: "#808080",
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{

@@ -10,6 +10,7 @@ import { useContext, useState } from "react";
 import LikeBtn from "../components/LikeBtn";
 import BasicInfo from "./BasicInfo";
 import Foundation from "@expo/vector-icons/Foundation";
+import HistoryCard from "./HistoryCard";
 import { AnimalContext } from "../context/AnimalProvider";
 
 export default function InfoSection() {
@@ -53,10 +54,14 @@ export default function InfoSection() {
         {/* Start adoption application button */}
         <Pressable style={styles.btn}>
           <Foundation name="paw" size={24} color="#ffff" />
-          <Text style={styles.btnText}>Adopt</Text>
+          <Text style={styles.btnText}>Adopt {name}</Text>
         </Pressable>
 
-        <Text>Viewed History</Text>
+        {/*View History of user*/}
+        <View>
+          <Text style={styles.subHeading}>Viewed History</Text>
+          <HistoryCard />
+        </View>
       </View>
     </ScrollView>
   );
@@ -67,6 +72,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: 390,
     paddingHorizontal: 16,
+    marginTop: 24,
     alignItems: "center",
     justifyContent: "space-between",
   },
@@ -108,5 +114,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: "#ffff",
     fontWeight: "600",
+  },
+  subHeading: {
+    fontSize: 24,
   },
 });
