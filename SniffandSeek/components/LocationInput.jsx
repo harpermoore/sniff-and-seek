@@ -1,4 +1,13 @@
-import { TextInput, View, StyleSheet, Pressable, Text } from "react-native";
+import {
+  TextInput,
+  View,
+  StyleSheet,
+  Pressable,
+  Text,
+  Animated,
+} from "react-native";
+import { useRef } from "react";
+import * as Haptics from "expo-haptics";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 export default function LocationInput({
@@ -7,6 +16,30 @@ export default function LocationInput({
   submittedValue,
   setSubmittedValue,
 }) {
+  const btnScale = useRef(new Animated.Value(1)).current;
+
+  const handleBtnPress = () => {
+    btnScale.setValue(1);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    Animated.spring(btnScale, {
+      toValue: 0.96,
+      friction: 15,
+      tension: 10,
+      useNativeDriver: true,
+    }).start(() => {
+      setSubmittedValue(location);
+    });
+  };
+
+  const handleBtnPressOut = () => {
+    Animated.spring(btnScale, {
+      toValue: 1,
+      friction: 15,
+      tension: 10,
+      useNativeDriver: true,
+    });
+  };
+
   return (
     <View style={styles.container}>
       <TextInput
@@ -16,21 +49,15 @@ export default function LocationInput({
         value={location}
         onChangeText={(input) => setLocation(input)}
       />
-      <Pressable
-        style={styles.buttonStyle}
-        onPress={() => setSubmittedValue(location)}
-      >
-        <View
-          style={{
-            flexDirection: "row",
-            gap: 6,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
+
+      {/* Search btn */}
+      <Pressable onPressIn={handleBtnPress} onPressOut={handleBtnPressOut}>
+        <Animated.View
+          style={[styles.btnContainer, { transform: [{ scale: btnScale }] }]}
         >
           <Text style={{ color: "#B50000", fontWeight: 600 }}>Search</Text>
           <FontAwesome name="search" size={20} color="#B50000" />
-        </View>
+        </Animated.View>
       </Pressable>
     </View>
   );
@@ -52,7 +79,11 @@ const styles = StyleSheet.create({
     borderCurve: "continuous",
     textAlign: "center",
   },
-  buttonStyle: {
+  btnContainer: {
+    flexDirection: "row",
+    gap: 6,
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: "#ffff",
     borderRadius: 60,
     paddingHorizontal: 16,

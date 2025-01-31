@@ -15,25 +15,6 @@ import { AnimalContext } from "../context/AnimalProvider";
 
 export default function InfoSection() {
   const { animalName: name, animalID } = useContext(AnimalContext);
-  const [modalVisible, setModalVisible] = useState(false);
-
-  const Message = () => {
-    return (
-      <Modal animationType="fade" transparent={true} visible={modalVisible}>
-        <Pressable onPress={handleCloseModal}>
-          <View style={styles.modalContainer}>
-            <View style={styles.modal}>
-              <Text style={styles.modalText}>Saved to Favorite List!</Text>
-            </View>
-          </View>
-        </Pressable>
-      </Modal>
-    );
-  };
-
-  const handleCloseModal = () => {
-    setModalVisible(false);
-  };
 
   return (
     <ScrollView>
@@ -41,15 +22,10 @@ export default function InfoSection() {
         <View style={styles.headingContainer}>
           <Text style={styles.heading}>{name}</Text>
 
-          <LikeBtn
-            animalID={animalID}
-            modalVisible={modalVisible}
-            setModalVisible={setModalVisible}
-          />
+          <LikeBtn animalID={animalID} />
         </View>
 
         <BasicInfo />
-        <Message />
 
         {/* Start adoption application button */}
         <Pressable style={styles.btn}>

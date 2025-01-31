@@ -1,3 +1,5 @@
+import "react-native-reanimated";
+import "react-native-gesture-handler";
 import { Text, View, StyleSheet, ScrollView, Dimensions } from "react-native";
 import { useState, useEffect, useRef } from "react";
 import { getCatData, getDogData } from "@/api/homepageApi";
@@ -16,6 +18,7 @@ export default function Home() {
   const [resourceData, setResourceData] = useState(null);
   const [location, setLocation] = useState("");
   const [submittedValue, setSubmittedValue] = useState("47408");
+  const [isLoading, setIsloading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {

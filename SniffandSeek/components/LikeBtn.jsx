@@ -1,63 +1,82 @@
-import {
-  Pressable,
-  StyleSheet,
-  View,
-  Animated,
-  useAnimatedValue,
-} from "react-native";
+import { Pressable, StyleSheet, View, Animated } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
-
 import { useAuth } from "../context/AuthContext";
 import { useRef, useState } from "react";
+import * as Haptics from "expo-haptics";
 
-export default function LikeBtn({ animalID, modalVisable, setModalVisible }) {
+export default function LikeBtn({ animalID }) {
   const { likedList, setLikedList } = useAuth();
   const btnScale = useRef(new Animated.Value(1)).current;
   const [isAnimating, setIsAnimating] = useState(false);
-  const [isPressed, setIsPressed] = useState(false); //control like icon
+  const [isPressed, setIsPressed] = useState(
+    likedList.includes(animalID) ? true : false
+  ); //control like icon animation
 
-  // IS LIKED OR NOT LIKED YET?
+  //Handle the likelist data
+  const handleLike = () => {
+    if (!likedList.includes(animalID)) {
+      setLikedList((prevList) => {
+        const updatedList = [...prevList, animalID];
+        console.log("added" + updatedList); // Logging the updated list directly
+        return updatedList;
+      });
 
-  const handleLiked = () => {
-    setLikedList((prevList) => {
-      const updatedList = [...prevList, animalID];
-      console.log(updatedList); // Logging the updated list directly
-      return updatedList;
-    });
-    setModalVisible(true);
+      handlePressIn();
+    } else {
+      setLikedList((prevList) => {
+        const updatedList = prevList.filter((id) => id !== animalID);
+        console.log("remove" + updatedList);
+        return updatedList;
+      });
+      handlePressIn();
+      setIsPressed(false);
+    }
   };
 
+  //btn animation when pressing in the btn
   const handlePressIn = () => {
-    if (!isAnimating) {
+    if (!isAnimating && !isPressed) {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
       Animated.spring(btnScale, {
-        toValue: 1, // 將 scale 從 1 動畫到 2
+        toValue: 1,
         friction: 5,
         tension: 100,
-        useNativeDriver: true, // 啟用原生驅動
+        useNativeDriver: true,
       }).start(() => {
         setIsAnimating(false);
       });
       setIsPressed(true);
-      handleLiked();
-    }
-  };
-
-  const handlePressOut = () => {
-    if (!isAnimating) {
+    } else {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
       Animated.spring(btnScale, {
-        toValue: 1.05, // 將 scale 從 1 動畫到 2
+        toValue: 1,
         friction: 5,
         tension: 100,
-        useNativeDriver: true, // 啟用原生驅動
+        useNativeDriver: true,
       }).start(() => {
         setIsAnimating(false);
       });
-      // setIsPressed(false);
+      setIsPressed(false);
+    }
+  };
+
+  //btn animation when pressing out the btn
+  const handlePressOut = () => {
+    if (!isAnimating) {
+      Animated.spring(btnScale, {
+        toValue: 1.05,
+        friction: 5,
+        tension: 100,
+        useNativeDriver: true,
+      }).start(() => {
+        setIsAnimating(false);
+      });
+      i;
     }
   };
 
   return (
-    <Pressable onPressIn={handlePressIn} onPressOut={handlePressOut}>
+    <Pressable onPressIn={handleLike} onPressOut={handlePressOut}>
       <Animated.View
         style={[styles.circle, { transform: [{ scale: btnScale }] }]}
       >
