@@ -71,7 +71,6 @@ export default function LikeBtn({ animalID }) {
       }).start(() => {
         setIsAnimating(false);
       });
-      i;
     }
   };
 

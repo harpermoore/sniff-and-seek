@@ -1,11 +1,4 @@
-import {
-  ScrollView,
-  Text,
-  StyleSheet,
-  View,
-  Modal,
-  Pressable,
-} from "react-native";
+import { ScrollView, Text, StyleSheet, View, Pressable } from "react-native";
 import { useContext, useState } from "react";
 import LikeBtn from "../components/LikeBtn";
 import BasicInfo from "./BasicInfo";
@@ -52,28 +45,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
   },
-
   heading: {
     fontSize: 36,
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  modal: {
-    justifyContent: "center",
-    alignItems: "center",
-    position: "absolute",
-    top: 160,
-    width: 260,
-    height: 260,
-    backgroundColor: "#fff",
-    borderRadius: 30,
-  },
-  modalText: {
-    color: "#000",
-    fontSize: 18,
   },
   btn: {
     backgroundColor: "#B50000",

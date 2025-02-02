@@ -6,7 +6,7 @@ import {
   Text,
   Animated,
 } from "react-native";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import * as Haptics from "expo-haptics";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
@@ -17,6 +17,8 @@ export default function LocationInput({
   setSubmittedValue,
 }) {
   const btnScale = useRef(new Animated.Value(1)).current;
+  const borderWidthAnim = useRef(new Animated.Value(1)).current;
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleBtnPress = () => {
     btnScale.setValue(1);
@@ -40,15 +42,44 @@ export default function LocationInput({
     });
   };
 
+  const handleFocus = () => {
+    setIsFocused(true);
+    Animated.timing(borderWidthAnim, {
+      toValue: 2,
+      duration: 180,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+    Animated.timing(borderWidthAnim, {
+      toValue: 1,
+      duration: 180,
+      useNativeDriver: false,
+    }).start();
+  };
+
   return (
     <View style={styles.container}>
-      <TextInput
-        autoComplete="postal-code"
-        style={styles.inputStyle}
-        placeholder="Enter your ZIP code"
-        value={location}
-        onChangeText={(input) => setLocation(input)}
-      />
+      <Animated.View
+        style={
+          isFocused
+            ? [styles.inputFocused, { borderWidth: borderWidthAnim }]
+            : [styles.inputStyle, { borderWidth: borderWidthAnim }]
+        }
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+      >
+        <TextInput
+          style={styles.input}
+          keyboardType="numeric"
+          autoComplete="postal-code"
+          placeholder="Enter your ZIP code"
+          value={location}
+          onChangeText={(input) => setLocation(input)}
+        />
+      </Animated.View>
 
       {/* Search btn */}
       <Pressable onPressIn={handleBtnPress} onPressOut={handleBtnPressOut}>
@@ -70,11 +101,19 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   inputStyle: {
-    width: 300,
+    width: 320,
     backgroundColor: "#fff",
     borderColor: "#8888",
     padding: 12,
-    borderWidth: 1,
+    borderRadius: 16,
+    borderCurve: "continuous",
+    textAlign: "center",
+  },
+  inputFocused: {
+    width: 320,
+    backgroundColor: "#fff",
+    borderColor: "#8888",
+    padding: 12,
     borderRadius: 16,
     borderCurve: "continuous",
     textAlign: "center",
@@ -95,5 +134,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.18,
     shadowRadius: 5,
     marginTop: 16,
+  },
+  input: {
+    width: 300,
   },
 });
