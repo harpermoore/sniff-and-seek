@@ -1,5 +1,7 @@
 import { View, StyleSheet, Text, Image, Pressable } from "react-native";
 import { Link } from "expo-router";
+import { MotiView } from "moti";
+import { Skeleton } from "moti/skeleton";
 import Foundation from "@expo/vector-icons/Foundation";
 
 const placeholderdog = require("../assets/images/placeholderdog.png");
@@ -13,7 +15,22 @@ export default function Card({
   haveImg,
   species,
   age,
+  isLoading,
 }) {
+  if (isLoading) {
+    return (
+      <MotiView
+        transition={{
+          type: "timing",
+        }}
+        style={styles.motiContainer}
+        animate={{ backgroundColor: "#ffffff" }}
+      >
+        <Skeleton colorMode="light" width={160} height={280} />
+      </MotiView>
+    );
+  }
+
   return (
     <Link href={`/${animalID}`} asChild>
       <Pressable>
@@ -71,6 +88,13 @@ const styles = StyleSheet.create({
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.1,
     shadowRadius: 3,
+  },
+  motiContainer: {
+    marginTop: 20,
+    alignItems: "center",
+    width: 160,
+    height: 280,
+    borderRadius: 10,
   },
   imgStyle: {
     width: "100%",

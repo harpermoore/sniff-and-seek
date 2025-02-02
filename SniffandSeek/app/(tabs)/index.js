@@ -18,29 +18,32 @@ export default function Home() {
   const [resourceData, setResourceData] = useState(null);
   const [location, setLocation] = useState("");
   const [submittedValue, setSubmittedValue] = useState("47408");
-  const [isLoading, setIsloading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchData = async () => {
       const catResponse = await getCatData(submittedValue, 20);
       const dogResponse = await getDogData(submittedValue, 20);
       const resourceResponse = await getResource();
 
-      setCatData(catResponse);
-      setDogData(dogResponse);
-      setResourceData(resourceResponse);
+      setCatData(catResponse); //set CatData
+      setDogData(dogResponse); //set DogData
+      setResourceData(resourceResponse); //set Event Section Data
+
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     };
     fetchData();
-  }, [submittedValue]);
+  }, [submittedValue]); //dependency: every time user submit the new location -> refresh data
 
-  //loading screen
-  if (!catData || !dogData || !resourceData) {
-    return <Text>Loading...</Text>;
-  }
-  const catList = Object.values(catData.data);
-  const dogList = Object.values(dogData.data);
-  const eventList = Object.values(resourceData.data);
+  //Turning data to list
+  const catList = Object.values(catData?.data || {});
+  const dogList = Object.values(dogData?.data || {});
+  const eventList = Object.values(resourceData?.data || {});
 
+  //event section data handling
   const eventSectionList = eventList.map((item, index) => {
     return {
       name: item.eventName,
@@ -67,9 +70,9 @@ export default function Home() {
       <AdoptableNavigation />
 
       <Text style={styles.headingStyle}>Adoptable cats and kittens</Text>
-      <HomePageList list={catList} species={"cats"} />
+      <HomePageList list={catList} species={"cats"} isLoading={isLoading} />
       <Text style={styles.headingStyle}>Adoptable dogs and puppies</Text>
-      <HomePageList list={dogList} species={"dogs"} />
+      <HomePageList list={dogList} species={"dogs"} isLoading={isLoading} />
 
       {/* Resource section */}
       <Text style={styles.headingStyle}>Events</Text>

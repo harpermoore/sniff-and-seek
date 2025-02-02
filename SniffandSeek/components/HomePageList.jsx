@@ -4,7 +4,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import Card from "@/components/Card";
 import { Link } from "expo-router";
 
-export default function HomePageList({ list, species }) {
+export default function HomePageList({ list, species, isLoading }) {
   return (
     <>
       <ScrollView
@@ -24,6 +24,7 @@ export default function HomePageList({ list, species }) {
 
             return (
               <Card
+                isLoading={isLoading}
                 key={animal.animalID}
                 animalID={animal.animalID}
                 animalName={animal.animalName}
