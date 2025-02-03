@@ -9,6 +9,7 @@ import LocationInput from "@/components/LocationInput";
 import EventSection from "@/components/EventSection";
 import AdoptableNavigation from "@/components/AdoptableNavigation";
 import { imgData } from "../../data/eventImg";
+import SplashScreen from "../../components/SplashScreen";
 
 const { width } = Dimensions.get("screen");
 
@@ -31,9 +32,9 @@ export default function Home() {
       setDogData(dogResponse); //set DogData
       setResourceData(resourceResponse); //set Event Section Data
 
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 2000);
+      // setTimeout(() => {
+      //   setIsLoading(false);
+      // }, 2000);
     };
     fetchData();
   }, [submittedValue]); //dependency: every time user submit the new location -> refresh data
@@ -54,6 +55,10 @@ export default function Home() {
       imgUrl: imgData[index],
     };
   });
+
+  if (isLoading) {
+    return <SplashScreen />;
+  }
 
   return (
     <ScrollView>
