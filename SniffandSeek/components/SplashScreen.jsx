@@ -4,9 +4,6 @@ import { View, StyleSheet, Text } from "react-native";
 export default function SplashScreen() {
   return (
     <View style={styles.container}>
-      <View style={styles.textWrapper}>
-        <Text style={styles.text}>Loading...</Text>
-      </View>
       <LottieView
         source={require("../assets/images/SplashScreen.json")}
         autoPlay={true}
@@ -16,6 +13,17 @@ export default function SplashScreen() {
           height: "100%",
           position: "absolute",
           top: 10,
+        }}
+      />
+      <LottieView
+        source={require("../assets/images/LoadingBar.json")}
+        autoPlay={true}
+        loop={true}
+        style={{
+          width: "100%",
+          height: "100%",
+          position: "absolute",
+          top: 120,
         }}
       />
     </View>
