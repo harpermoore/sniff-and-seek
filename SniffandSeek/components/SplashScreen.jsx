@@ -1,9 +1,21 @@
 import LottieView from "lottie-react-native";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Image } from "react-native";
+
+const logo = require("../assets/images/LogoText.png");
 
 export default function SplashScreen() {
   return (
     <View style={styles.container}>
+      <Image
+        source={logo}
+        style={{
+          width: 340,
+          height: 200,
+          resizeMode: "contain",
+          position: "absolute",
+          top: 120,
+        }}
+      />
       <LottieView
         source={require("../assets/images/SplashScreen.json")}
         autoPlay={true}
