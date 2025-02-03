@@ -46,7 +46,7 @@ export default function LocationInput({
     setIsFocused(true);
     Animated.timing(borderWidthAnim, {
       toValue: 2,
-      duration: 180,
+      duration: 120,
       useNativeDriver: false,
     }).start();
   };
@@ -55,7 +55,7 @@ export default function LocationInput({
     setIsFocused(false);
     Animated.timing(borderWidthAnim, {
       toValue: 1,
-      duration: 180,
+      duration: 120,
       useNativeDriver: false,
     }).start();
   };
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   inputStyle: {
-    width: 320,
+    width: 360,
     backgroundColor: "#fff",
     borderColor: "#8888",
     padding: 12,
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   inputFocused: {
-    width: 320,
+    width: 360,
     backgroundColor: "#fff",
     borderColor: "#8888",
     padding: 12,

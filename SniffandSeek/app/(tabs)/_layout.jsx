@@ -2,10 +2,22 @@ import { Tabs } from "expo-router";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import SplashScreen from "../../components/SplashScreen";
 
 export default function TabsLayout() {
+  const [isFirstLoading, setIsFirstLoading] = useState(true);
   const [activated, setActivated] = useState("index");
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsFirstLoading(false);
+    }, 9000);
+  }, []);
+
+  if (isFirstLoading) {
+    return <SplashScreen />;
+  }
 
   return (
     <Tabs

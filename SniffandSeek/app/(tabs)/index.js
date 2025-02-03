@@ -1,6 +1,13 @@
 import "react-native-reanimated";
 import "react-native-gesture-handler";
-import { Text, View, StyleSheet, ScrollView, Dimensions } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+  Dimensions,
+  Image,
+} from "react-native";
 import { useState, useEffect, useRef } from "react";
 import { getCatData, getDogData } from "@/api/homepageApi";
 import { getResource } from "@/api/resourceApi";
@@ -9,7 +16,8 @@ import LocationInput from "@/components/LocationInput";
 import EventSection from "@/components/EventSection";
 import AdoptableNavigation from "@/components/AdoptableNavigation";
 import { imgData } from "../../data/eventImg";
-import SplashScreen from "../../components/SplashScreen";
+
+const logo = require("../../assets/images/LogoText.png");
 
 const { width } = Dimensions.get("screen");
 
@@ -32,9 +40,9 @@ export default function Home() {
       setDogData(dogResponse); //set DogData
       setResourceData(resourceResponse); //set Event Section Data
 
-      // setTimeout(() => {
-      //   setIsLoading(false);
-      // }, 2000);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     };
     fetchData();
   }, [submittedValue]); //dependency: every time user submit the new location -> refresh data
@@ -56,13 +64,19 @@ export default function Home() {
     };
   });
 
-  if (isLoading) {
-    return <SplashScreen />;
-  }
-
   return (
-    <ScrollView>
+    <ScrollView style={{ flex: 1 }}>
       <View style={styles.inputContainer}>
+        <Image
+          source={logo}
+          style={{
+            width: 240,
+            height: 120,
+            resizeMode: "contain",
+            position: "absolute",
+            top: 58,
+          }}
+        />
         <Text style={styles.heading}>Enter Your Location</Text>
         <LocationInput
           location={location}
@@ -89,11 +103,11 @@ export default function Home() {
 const styles = StyleSheet.create({
   inputContainer: {
     width: width,
-    height: 300,
+    height: 360,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#B50000",
-    paddingTop: 64,
+    paddingTop: 54,
   },
   headingStyle: {
     marginTop: 16,
@@ -104,8 +118,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#f7f7f7",
   },
   heading: {
-    fontSize: 32,
+    fontSize: 24,
     color: "#ffff",
     marginBottom: 12,
+    marginTop: 76,
   },
 });
