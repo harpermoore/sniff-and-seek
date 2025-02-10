@@ -31,6 +31,7 @@ export default function TabsLayout() {
         name="index"
         options={{
           title: "Home",
+
           headerShown: false,
           tabBarIcon: ({ focused }) =>
             focused ? (
@@ -44,7 +45,9 @@ export default function TabsLayout() {
         name="favorite"
         options={{
           title: "Favorite",
-          headerShown: false,
+          headerShown: true,
+          headerStyle: { backgroundColor: "#B50000" },
+          headerTintColor: "#fff",
           tabBarIcon: ({ focused }) =>
             focused ? (
               <AntDesign name="heart" size={22} color="#B50000" />
@@ -57,7 +60,9 @@ export default function TabsLayout() {
         name="report"
         options={{
           title: "Report",
-          headerShown: false,
+          headerShown: true,
+          headerStyle: { backgroundColor: "#B50000" },
+          headerTintColor: "#fff",
           tabBarIcon: ({ focused }) =>
             focused ? (
               <FontAwesome name="file" size={22} color="#B50000" />

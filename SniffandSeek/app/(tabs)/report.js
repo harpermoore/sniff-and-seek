@@ -3,16 +3,14 @@ import { Link } from "expo-router";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
 const width = Dimensions.get("screen");
-const reportImg = require("../../assets/images/Report.png");
 
 export default function report() {
   return (
     <View>
-      <Image style={styles.img} source={reportImg} />
       <View style={styles.container}>
         <Link href={"reportUpload"}>
           <View style={styles.card}>
-            <Text style={styles.heading}>Report Stray animals</Text>
+            <Text style={styles.heading}>Report Stray Animals</Text>
             <View style={styles.icon}>
               <AntDesign name="arrowright" size={32} color="#ffff" />
             </View>
@@ -20,7 +18,14 @@ export default function report() {
         </Link>
 
         <View style={styles.card}>
-          <Text style={styles.heading}>Report History</Text>
+          <Text style={styles.heading}>Report Missing Animals</Text>
+          <View style={styles.icon}>
+            <AntDesign name="arrowright" size={32} color="#ffff" />
+          </View>
+        </View>
+
+        <View style={styles.card}>
+          <Text style={styles.heading}>My Report History</Text>
           <View style={styles.icon}>
             <AntDesign name="arrowright" size={32} color="#ffff" />
           </View>
@@ -32,7 +37,7 @@ export default function report() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 90,
+    marginTop: 48,
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
@@ -42,8 +47,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#B50000",
     flexDirection: "row",
     gap: 12,
-    width: 390,
-    height: 200,
+    width: 380,
+    height: 160,
     paddingHorizontal: 24,
     justifyContent: "center",
     alignItems: "center",
@@ -51,7 +56,7 @@ const styles = StyleSheet.create({
     borderCurve: "continuous",
   },
   heading: {
-    fontSize: 32,
+    fontSize: 28,
     color: "#fff",
   },
   img: {

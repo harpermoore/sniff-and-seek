@@ -4,7 +4,7 @@ import Foundation from "@expo/vector-icons/Foundation";
 export default function CTAbtn({ children }) {
   return (
     <Pressable style={styles.btn}>
-      <Foundation name="paw" size={24} color="#ffff" />
+      <Foundation name="paw" size={32} color="#ffff" />
       <Text style={styles.btnText}>{children}</Text>
     </Pressable>
   );

@@ -1,4 +1,5 @@
 import { View, StyleSheet, Text, Image, Pressable } from "react-native";
+import { useEffect } from "react";
 import { Link } from "expo-router";
 import { MotiView } from "moti";
 import { Skeleton } from "moti/skeleton";

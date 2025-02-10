@@ -1,4 +1,4 @@
-import { Text, StyleSheet, ScrollView } from "react-native";
+import { Text, StyleSheet, ScrollView, View } from "react-native";
 import { getAnimalData } from "@/api/animalProfileApi";
 import { useEffect, useState } from "react";
 import { useLocalSearchParams } from "expo-router";

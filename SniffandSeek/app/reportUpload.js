@@ -19,11 +19,13 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import CTAbtn from "../components/CTAbtn";
+import UploadedPhoto from "../components/UploadedPhoto";
 import { Input } from "@rneui/themed";
 import Entypo from "@expo/vector-icons/Entypo";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { CameraView, CameraType, useCameraPermissions } from "expo-camera";
+import { Stack } from "expo-router";
 
 const dropdownData = [
   { label: "Cat", value: "cat" },
@@ -70,8 +72,6 @@ export default function reportUpload() {
       if (!location) return;
 
       const { latitude, longitude } = location.coords;
-
-      // 反向地理編碼
       const result = await reverseGeocode(latitude, longitude);
 
       if (result && result.length > 0) {
@@ -104,7 +104,7 @@ export default function reportUpload() {
     }
   };
 
-  //camera permission
+  //Camera permission
   const getCameraPermission = async () => {
     if (!permission || !permission.granted) {
       const { granted } = await requestPermission();
@@ -137,10 +137,20 @@ export default function reportUpload() {
           paddingBottom: 120,
         }}
       >
+        <Stack.Screen
+          options={{
+            title: "Roport Application Form",
+            headerStyle: { backgroundColor: "#B50000" },
+            headerTintColor: "#fff",
+            headerTitleAlign: "center",
+            headerBackTitle: "Back",
+          }}
+        />
+
         <View style={styles.container}>
           <Pressable onPress={pickImage}>
             <View style={styles.field}>
-              <Text style={styles.heading}>Upload image</Text>
+              <Text style={styles.heading}>Upload image from Device</Text>
               <FontAwesome5 name="cloud-upload-alt" size={24} color="#B50000" />
             </View>
           </Pressable>
@@ -151,12 +161,17 @@ export default function reportUpload() {
             <ScrollView
               horizontal={true}
               showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{
+                gap: 12,
+              }}
             >
               {image.map((item, index) => (
-                <Image
+                <UploadedPhoto
+                  item={item}
+                  uri={item.uri}
                   key={index}
-                  style={styles.img}
-                  source={{ uri: item.uri }}
+                  image={image}
+                  setImage={setImage}
                 />
               ))}
             </ScrollView>
@@ -165,36 +180,28 @@ export default function reportUpload() {
           {/* Camera setting */}
           <Pressable onPress={getCameraPermission}>
             <View style={styles.field}>
-              <Text style={styles.heading}>Upload photos by camera</Text>
+              <Text style={styles.heading}>Take Photos by Camera</Text>
               <AntDesign name="camerao" size={24} color="#B50000" />
             </View>
           </Pressable>
 
-          <Text style={styles.heading}>Upload Images</Text>
+          <Text style={styles.heading}>Photos taken</Text>
           {comfirmedImg ? (
             <Image style={styles.img} source={{ uri: comfirmedImg }} />
           ) : null}
 
-          {/* form section */}
-          <View style={styles.inputBlock}>
-            <View style={styles.userInfo}>
-              <FontAwesome name="user" size={22} color="black" />
-              <Text style={styles.heading}>User Name</Text>
-            </View>
-            <Text style={styles.text}>default user ID</Text>
-          </View>
-
-          <View style={{ alignItems: "center", justifyContent: "center" }}>
+          <View style={styles.formSection}>
             <View style={styles.inputBlock}>
-              <Text style={styles.heading}>Location</Text>
-              <Pressable style={styles.btn} onPress={handleLocation}>
-                <Text>Use current location</Text>
-              </Pressable>
+              <View style={styles.textContainer}>
+                <Text style={styles.heading}>Location</Text>
+                <Pressable style={styles.btn} onPress={handleLocation}>
+                  <Text>Use current location</Text>
+                </Pressable>
+              </View>
 
-              <Text>{isLoading ? "Location loading..." : address}</Text>
               <Input
                 inputContainerStyle={styles.input}
-                placeholder="Enter your location"
+                placeholder={address ? address : "Enter your location"}
                 leftIcon={
                   <Entypo name="location-pin" size={24} color="black" />
                 }
@@ -202,8 +209,9 @@ export default function reportUpload() {
             </View>
 
             <View style={styles.inputBlock}>
-              <Text style={styles.heading}>Date</Text>
-
+              <View style={styles.textContainer}>
+                <Text style={styles.heading}>Date</Text>
+              </View>
               <Input
                 inputContainerStyle={styles.input}
                 placeholder="MM/DD/YYYY"
@@ -211,9 +219,11 @@ export default function reportUpload() {
               />
             </View>
 
+            {/* Animal type dropdown */}
             <View style={styles.inputBlock}>
-              <Text style={styles.heading}>Animal Type</Text>
-
+              <View style={styles.textContainer}>
+                <Text style={styles.heading}>Animal Type</Text>
+              </View>
               <Dropdown
                 style={styles.dropdown}
                 placeholderStyle={styles.placeholderStyle}
@@ -224,7 +234,7 @@ export default function reportUpload() {
                 maxHeight={300}
                 labelField="label"
                 valueField="value"
-                placeholder="Select item"
+                placeholder="Select Animal Type"
                 value={selectedAnimalType}
                 onChange={(item) => {
                   setAnimalType(item.value);
@@ -241,12 +251,18 @@ export default function reportUpload() {
             </View>
 
             <View style={styles.inputBlock}>
-              <Text style={styles.heading}>Description</Text>
-              <TextInput style={styles.desField} />
+              <View style={styles.textContainer}>
+                <Text style={styles.heading}>Note</Text>
+              </View>
+              <Input
+                inputContainerStyle={styles.textField}
+                inputStyle={{ textAlignVertical: "top" }}
+                placeholder="Something we need to know about?"
+              />
             </View>
           </View>
 
-          <CTAbtn>Preview application</CTAbtn>
+          <CTAbtn>Preview Application</CTAbtn>
         </View>
       </ScrollView>
     );
@@ -307,19 +323,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#B50000",
     borderRadius: 16,
+    gap: 12,
   },
   heading: {
     fontSize: 18,
-    paddingHorizontal: 12,
+    color: "#000000",
   },
-  img: {
-    width: 100,
-    height: 160,
-    borderRadius: 24,
-    borderCurve: "continuous",
-    marginLeft: 12,
-    resizeMode: "center",
-  },
+
   imgContainer: {
     flexDirection: "row",
     height: 200,
@@ -333,22 +343,27 @@ const styles = StyleSheet.create({
     borderColor: "#8888",
     borderRadius: 16,
     borderCurve: "continuous",
-    padding: 8,
+    padding: 12,
   },
   inputBlock: {
     flexDirection: "column",
-    marginTop: 32,
-    gap: 12,
+    alignItems: "flex-start",
+    justifyContent: "center",
+    marginTop: 16,
+    gap: 16,
   },
   dropdown: {
     width: 360,
-    margin: 16,
-    height: 50,
-    borderBottomColor: "gray",
-    borderBottomWidth: 0.5,
+    height: 48,
+    backgroundColor: "#ffff",
+    marginHorizontal: 12,
+    borderRadius: 16,
+    borderColor: "#8888",
+    borderWidth: 1,
+    padding: 12,
   },
   icon: {
-    marginRight: 5,
+    marginRight: 6,
   },
   placeholderStyle: {
     fontSize: 16,
@@ -375,14 +390,9 @@ const styles = StyleSheet.create({
     width: 160,
     height: 24,
     borderWidth: 1,
-    borderRadius: 12,
+    borderRadius: 10,
     borderCurve: "continuous",
     borderColor: "#8888",
-  },
-  userInfo: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
   },
   text: {
     fontSize: 12,
@@ -423,5 +433,20 @@ const styles = StyleSheet.create({
     backgroundColor: "#B50000",
     paddingHorizontal: 32,
     paddingVertical: 12,
+  },
+  textContainer: {
+    paddingLeft: 12,
+    gap: 6,
+  },
+  formSection: {
+    marginTop: 54,
+  },
+  textField: {
+    backgroundColor: "#ffffff",
+    borderColor: "#8888",
+    borderWidth: 1,
+    borderRadius: 16,
+    height: 120,
+    padding: 12,
   },
 });

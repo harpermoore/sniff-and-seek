@@ -42,7 +42,7 @@ export default function Home() {
 
       setTimeout(() => {
         setIsLoading(false);
-      }, 2000);
+      }, 5000);
     };
     fetchData();
   }, [submittedValue]); //dependency: every time user submit the new location -> refresh data

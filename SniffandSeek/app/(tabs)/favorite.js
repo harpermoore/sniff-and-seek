@@ -33,7 +33,7 @@ export default function favorite() {
   const EmptyListComponent = () => {
     return (
       <View style={styles.emptyList}>
-        <Text style={styles.emptyListText}>Your Favorite List is empty</Text>
+        <Text style={styles.emptyListText}>Your Favorite List is Empty</Text>
         <Image style={styles.img} source={paw} />
       </View>
     );
@@ -42,10 +42,10 @@ export default function favorite() {
   if (likedList.length === 0) return <EmptyListComponent />;
   else
     return (
-      <ScrollView style={{ marginTop: 96 }}>
-        <View style={styles.headingContainer}>
+      <ScrollView style={{ marginTop: 24 }}>
+        {/* <View style={styles.headingContainer}>
           <Text style={styles.heading}>Favorite</Text>
-        </View>
+        </View> */}
 
         <View style={styles.container}>
           {likedData.map((animal) => {

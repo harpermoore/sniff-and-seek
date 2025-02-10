@@ -11,6 +11,30 @@ export default function RootLayout() {
           options={{
             headerTitle: "",
             headerTransparent: true,
+            headerStyle: { backgroundColor: "#B50000" },
+            headerTintColor: "#fff",
+            headerBackTitleVisible: false,
+            headerBackTitle: "Home",
+          }}
+        />
+        <Stack.Screen
+          name="catSearch"
+          options={{
+            headerTitle: "",
+            headerTransparent: true,
+            headerStyle: { backgroundColor: "#B50000" },
+            headerTintColor: "#fff",
+            headerBackTitleVisible: false,
+            headerBackTitle: "Home",
+          }}
+        />
+        <Stack.Screen
+          name="dogSearch"
+          options={{
+            headerTitle: "",
+            headerTransparent: true,
+            headerStyle: { backgroundColor: "#B50000" },
+            headerTintColor: "#fff",
             headerBackTitleVisible: false,
             headerBackTitle: "Home",
           }}
