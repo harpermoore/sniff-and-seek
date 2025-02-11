@@ -65,7 +65,14 @@ export default function Home() {
   });
 
   return (
-    <ScrollView style={{ flex: 1 }}>
+    <ScrollView stickyHeaderIndices={[0]}>
+      <View
+        style={{
+          backgroundColor: "#B50000",
+          height: 48,
+          width: width,
+        }}
+      ></View>
       <View style={styles.inputContainer}>
         <Image
           source={logo}
