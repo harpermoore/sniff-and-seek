@@ -1,15 +1,13 @@
 import {
-  Button,
   Text,
   ScrollView,
   StyleSheet,
   Image,
   View,
-  Platform,
   Pressable,
   TextInput,
-  TouchableOpacity,
 } from "react-native";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import { useState, useEffect, useRef } from "react";
 import * as MediaLibrary from "expo-media-library";
 import * as ImagePicker from "expo-image-picker";
@@ -23,7 +21,6 @@ import UploadedPhoto from "../components/UploadedPhoto";
 import { Input } from "@rneui/themed";
 import Entypo from "@expo/vector-icons/Entypo";
 import Fontisto from "@expo/vector-icons/Fontisto";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { CameraView, CameraType, useCameraPermissions } from "expo-camera";
 import { Stack } from "expo-router";
 
@@ -45,6 +42,7 @@ export default function reportUpload() {
   const cameraRef = useRef(null);
   const [isCameraOpened, setIsCameraOpened] = useState(false);
   const [comfirmedImg, setConfirmImg] = useState(null);
+  const [date, setDate] = useState(new Date()); //Date Picker
 
   const getCurrentLocation = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
@@ -212,6 +210,7 @@ export default function reportUpload() {
               <View style={styles.textContainer}>
                 <Text style={styles.heading}>Date</Text>
               </View>
+              <DateTimePicker value={date} mode="date" />
               <Input
                 inputContainerStyle={styles.input}
                 placeholder="MM/DD/YYYY"
@@ -270,6 +269,12 @@ export default function reportUpload() {
     if (isCameraOpened) {
       return (
         <View style={styles.cameraContainer}>
+          <Stack.Screen
+            options={{
+              title: "Roport Application Form",
+              headerShown: false,
+            }}
+          />
           <CameraView ref={cameraRef} style={styles.camera} facing={"back"}>
             {/* take picture btn */}
             <Pressable style={styles.cameraBtn} onPress={takePic}>
@@ -284,6 +289,7 @@ export default function reportUpload() {
                   justifyContent: "center",
                   alignItems: "center",
                   gap: 6,
+                  paddingTop: 24,
                 }}
               >
                 <Ionicons name="arrow-back" size={24} color="#ffff" />
@@ -426,7 +432,7 @@ const styles = StyleSheet.create({
   },
   uploadBtn: {
     position: "absolute",
-    left: "50%",
+    left: "46%",
     bottom: 48,
     transform: [{ translateX: -50 }],
     borderRadius: 12,
